@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+       "name": "client",
+       "image": "kpsychas/multi-client",
+       "hostname": "client",
+       "essential": false
+    },
+    {
+       "name": "server",
+       "image": "kpsychas/multi-server",
+       "hostname": "api",
+       "essential": false
+    },
+    {
+       "name": "worker",
+       "image": "kpsychas/multi-worker",
+       "hostname": "worker",
+       "essential": false
+    },
+    {
+       "name": "nginx",
+       "image": "kpsychas/multi-nginx",
+       "hostname": "nginx",
+       "essential": true,
+       "portMappings": [
+	  {
+	    "hostPort": 80,
+	    "containerPort": 80
+	  }
+       ],
+       "links": ["client", "server"]
+    }
+  ]
+}
