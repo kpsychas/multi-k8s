@@ -22,3 +22,17 @@ after_success:
   - docker push kpsychas/multi-nginx
   - docker push kpsychas/multi-server
   - docker push kpsychas/multi-worker
+
+    #deploy:
+    #  provider: elasticbeanstalk
+    #  region: us-east-1
+    #  app: multi-docker
+    #  env: MultiDocker-env
+    #  bucket_name:
+    #  bucket_path: docker-multi
+    #  on:
+    #    branch: master
+    #  access_key_id:
+    #    secure: $AWS_ACCESS_KEY
+    #  secret_access_key:
+    #    secure: $AWS_SECRET_KEY
