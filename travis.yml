@@ -1,0 +1,24 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t kpsychas/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true kpsychas/react-test npm test
+
+after_success:
+  - docker build -t kpsychas/multi-client ./client
+  - docker build -t kpsychas/multi-nginx ./nginx
+  - docker build -t kpsychas/multi-server ./server
+  - docker build -t kpsychas/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
+  # move to docker hub
+  - docker push kpsychas/multi-client
+  - docker push kpsychas/multi-nginx
+  - docker push kpsychas/multi-server
+  - docker push kpsychas/multi-worker
