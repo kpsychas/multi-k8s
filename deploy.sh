@@ -10,6 +10,6 @@ docker push kpsychas/multi-server:$SHA
 docker push kpsychas/multi-worker:$SHA
 
 kubectl apply -f k8s
-kubectl set image deployments/server-deployment server=kpsychas/multi-server$SHA
-kubectl set image deployments/client-deployment client=kpsychas/multi-client$SHA
-kubectl set image deployments/worker-deployment worker=kpsychas/multi-worker$SHA
+kubectl set image deployments/server-deployment server=kpsychas/multi-server:$SHA
+kubectl set image deployments/client-deployment client=kpsychas/multi-client:$SHA
+kubectl set image deployments/worker-deployment worker=kpsychas/multi-worker:$SHA
